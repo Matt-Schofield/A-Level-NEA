@@ -1,0 +1,620 @@
+
+
+
+
+
+
+/* --------- Reset & Colour scheme  --------- */
+
+/* Default broswer styling reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: auto;
+    width: auto;
+    /* overflow: hidden; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Variable names & Colour scheme */
+:root {
+    --titlebar-height: 30px;
+    --canvas-width: 1300px;
+    --toolbar-item-count: 10;
+    --toolbar-button-size: 70px;
+    /* Draggable + (Button Width * Number of Buttons) + Collapse Width*/
+    --toolbar-length: calc(60px + (var(--toolbar-button-size) * var(--toolbar-item-count)) + 65px);
+    --dark-one: #1a1d29;
+}
+
+
+
+
+
+
+/* --------- Defaults --------- */
+
+/* Default colourings for background and text*/
+body {
+    background-color: #1a1d29;
+    color: #e9e8e8;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Custom inner body to account for titlebar height*/
+.body-wrapper {
+    height: calc(100vh - var(--titlebar-height));
+    display: flex;
+}
+
+/* Default button styling */
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+textarea {
+    text-overflow: ellipsis;
+}
+
+textarea:focus {
+    outline: 1px solid #256b7c;
+    overflow: auto;
+}
+
+
+
+
+
+
+/* --------- Scrollbar --------- */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+
+
+/* --------- Title bar --------- */
+
+/* Title bar container */
+.title-bar {
+    height: var(--titlebar-height);
+    width: 100%;
+    background-color: #1a1d29;
+}
+
+#doc-title {
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: calc(var(--titlebar-height) / 2);
+    transform: translate(0%, -50%);
+    filter: opacity(70%);
+    font-size: 13px;
+}
+
+/* Wrapper for holding the Min/Rest/Close buttons */
+#window-widgets-wrapper {
+    height: 100%;
+    width: 150px;
+    float: right;
+    display: flex;
+    flex: 1 1 0;
+}
+
+/* Min/Rest/Close buttons */
+.window-widget {
+    height: 100%;
+    width: 100%;
+    background-color: #1a1d29;
+    display: flex;
+}
+
+/* Min/Rest/Close icons*/
+.window-widget > img {
+    width: 35%;
+    margin: auto;
+    user-select: none;
+}
+
+/* Min/Rest/Close hover feature */
+.window-widget:hover {
+    background-color: #232636;
+}
+
+/* Red colour for Close hover */
+.window-widget:last-child:hover {
+    background-color: #ff2d2d;
+}
+
+
+
+
+
+
+/* --------- Sidebar --------- */
+
+/* Container for Logo cont./File cont./I&E cont. */
+.sidebar {
+    width: 400px;
+    background-color: red;
+}
+
+
+
+
+
+
+/* --------- Logo Container --------- */
+
+/* Logo container */
+.logo-container {
+    height: 95px;
+    background-color: #1e202e;
+}
+
+#logo {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+
+
+/* --------- File System --------- */
+
+/* Outer container for file contents - allows for a padded border */
+.file-container-wrapper {
+    height: calc(100% - (95px + 150px));
+    background-color: #26293a;
+    /* border: 1px solid red; */
+}
+
+/* Inner container for file contents - containes files directly */
+.file-container {
+    /* border: 1px solid blue; */
+    background-color: #303449;
+    height: 92.5%;
+    width: 90%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    padding-top: 15px;
+}
+
+.file-widget {
+    border: 1px solid #1a1a1a;
+    width: 320px;
+    height: 75px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.widget-content {
+    background-color: #26293a;
+    width: 80%;
+}
+
+.file-title {
+    font-weight: bold;
+    position: relative;
+    top: 8%;
+    left: 5%;
+}
+
+.file-desc {
+    position: relative;
+    left: 5%;
+    width: 90%;
+    height: 35px;
+    margin-top: 4%;
+    padding: 4px 0 0 4px;
+    font-size: 85%;
+    text-overflow: ellipsis;
+    resize: none;
+    color: #e9e8e888;
+    background-color: transparent;
+    border: none;
+}
+
+.file-type {
+    font-style: italic;
+    font-weight: normal;
+    color: #e9e8e888;
+}
+
+.widget-close {
+    width: 8%;
+    background-color: #26293a;
+}
+
+.widget-close-icon {
+    width: 20px;
+    position: relative;
+    top: 4px;
+    left: -4px;
+    filter: opacity(50%);
+}
+
+.widget-grabber {
+    background-color: #1e202e;
+    min-width: 20%;
+    cursor:n-resize;
+}
+
+.widget-grabber-icon {
+    width: 32px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: opacity(20%);
+    user-select: none;
+}
+
+.empty-container-placeholder {
+    height: 30%;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: opacity(30%);
+    padding-top: 27px;
+    background-color: #e9e8e822;
+    border-radius: 18px;
+}
+
+.empty-container-placeholder > img {
+    width: 40%;
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.empty-container-placeholder > p {
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* --------- Import / Export --------- */
+
+/* Main Container for the Import/Export controls */
+.control-panel {
+    height: 150px;
+    background-color: #1e202e;
+}
+
+/* Title text and hr line for the control panel */
+#control-panel-header {
+    text-align: center;
+    position: relative;
+    top: 8px;
+    color: #e9e8e888;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#control-panel-header > hr {
+    width: 80%;
+    border: none;
+    border-top: 1px solid #e9e8e844;
+    display: block;
+    margin: 8px auto;
+}
+
+/* Container for Imp/Exp buttons */
+#control-buttons-wrapper {
+    height: 80px;
+    width: 80%;
+    display: block;
+    margin: 20px auto;
+    background-color: #303449;
+    display: flex;
+    flex: 1 1 0;
+}
+
+/* Imp/Exp buttons */
+.control-button {
+    background-color: #232636;
+    height: 80%;
+    width: calc((100% - 50px) / 4);
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+    margin: 0 5px;
+    color: #e9e8e8;
+}
+
+.control-button:first-child {
+    margin-left: 10px;
+}
+
+.control-button:hover .control-button-icon{
+    opacity: 40%;
+}
+
+/* Imp/Exp button icons */
+.control-button-icon {
+    width: 32px;
+    filter: opacity(80%);
+}
+
+/* Hide input element */
+#system {
+    display: none;
+}
+
+/* Repostion for System icon */
+label.control-button > img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+/* --------- Canvas & Media --------- */
+
+/* Main area wrapper containing the Toolbar/Canvas/Media Cont. */
+.paint-app-wrapper {
+    flex: 4 1 0;
+    background-color: #232636;
+}
+
+/* Media Cont. */
+.media-container {
+    border: 2px solid #256b7c;
+    z-index: 5;
+    position: absolute;
+    top: 77px;
+    left: 470px;
+    height: 750px;
+    width: var(--canvas-width);
+    background-color: #303449;
+}
+
+/* Canvas */
+#canvas {
+    border: 2px solid #cf6060;
+    z-index: 4;
+    position: absolute;
+    top: 77px;
+    left: 470px;
+    height: 750px;
+    width: var(--canvas-width);
+}
+
+/* Class which changes the media z-index to allow for layer switching */
+.switch {
+    z-index: 1 !important;
+}
+
+/* The actual media (was media-embed) */
+.media {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+/* --------- Toolbar - HORIZONTAL --------- */
+
+/* The container for the three components of the toolbar */
+#toolbar {
+    /* width: calc(var(--toolbar-length) + 20px); */
+    height: var(--toolbar-button-size);
+    position: relative;
+    /* Canvas offset + Half the canvas width - Half the toolbar width*/
+    left: calc(100px + (var(--canvas-width)/2) - var(--toolbar-length)/2);
+    top: 90%;
+    z-index: 10;
+    display: flex;
+}
+
+/* The draggable widget for the toolbar */
+#draggable {
+    height: 100%;
+    width: var(--toolbar-button-size);
+    margin-right: 5px;
+    border-radius: 50%;
+    background-color: #4e4e50;
+    cursor: grab;
+    z-index: 10;
+}
+
+/* Icon for draggable widget */
+#draggable-icon {
+    width: 35px;
+    position: absolute;
+    top: 50%;
+    left: calc(var(--toolbar-button-size)/2);
+    transform: translate(-50%, -55%);
+    user-select: none;
+}
+
+/* The central container for the tool buttons */
+#tool-container {
+    height: 100%;
+    width: calc(--toolbar-button-size * var(--toolbar-item-count));
+    border-radius: 18px 0 0 18px;
+    display: flex;
+    z-index: 10;
+    background-color: black;
+}
+
+/* The tool buttons */
+.tool-buttons {
+    height: 100%;
+    width: var(--toolbar-button-size);
+    flex-grow: 1;
+    background-color: #e9e8e8;
+    border-right: 1px solid lightgrey;
+    z-index: 2;
+}
+
+.tool-buttons:last-child {
+    background-color: #4e4e50;
+    border: none;
+}
+
+/* Tool button icons */
+.tool-buttons > img {
+    height: 32px;
+    width: 32px;
+    user-select: none;
+}
+
+/* Specific icon styling for icons on main toolbar */
+.tool-button-icons {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style fix */
+#shape {
+    border-bottom: none;
+}
+
+/* Custom workaround for border radius */
+#pen {
+    border-radius: 18px 0 0 18px;
+}
+
+/* Override inherited :last-child style from main toolbar */
+#square {
+    background-color: #e9e8e8;
+    border-radius: 0 0 18px 18px;
+    border-top: 1px solid lightgrey;
+}
+
+/* Indicates a selected function */
+.tool-buttons:active {
+    filter: brightness(85%);
+}
+
+/* Indicates the currently selected tool */
+.selected {
+    background-color: #d8d8d8 !important;
+}
+
+/* Dropdown container */
+.dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual dropdown buttons */
+.dropdown-buttons {
+    border-top: 1px solid lightgrey;
+    height: var(--toolbar-button-size);
+    user-select: none;
+}
+
+/* The widget for collapsing/expanding the toolbar */
+#collapse-button {
+    z-index: 9 !important;
+    height: 100%;
+    width: var(--toolbar-button-size);
+    position: relative;
+    top: 50%;
+    transform: translate(-55%, -50%);
+    background-color: #4e4e50;
+    border-radius: 0 50% 50% 0;
+}
+
+.collapse-arrow {
+    filter: invert(20%);
+    height: 25px;
+    width: 25px;
+    position: relative;
+    top: 50%;
+    left: 55%;
+    transform: translate(0%, -50%);
+}
+
+.collapsed {
+    display: none !important;
+}
+
+/* --------- Toolbar - VERTICAL --------- */
+
+.toolbar-vertical {
+    position: absolute;
+    width: var(--toolbar-button-size) !important;
+    height: calc(var(--toolbar-length) + 20px) !important;
+    flex-direction: column;
+}
+
+.draggable-vertical {
+    height: var(--toolbar-button-size) !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 5px;
+}
+
+.draggable-icon-vertical {
+    left: 50% !important;
+    top: calc(var(--toolbar-button-size)/2) !important;
+}
+
+.tool-container-vertical {
+    flex-direction: column !important;
+    height: calc(--toolbar-button-size* var(--toolbar-item-count)) !important;
+    width: 100% !important;
+    border-radius: 18px 18px 0 0 !important;
+}
+
+.tool-buttons-vertical {
+    width: 100% !important;
+    height: var(--toolbar-button-size) !important;
+}
+
+
+.dropdown-vertical {
+    flex-direction: row !important;
+}
+
+.pen-vertical {
+    border-radius: 18px 18px 0 0 !important;
+}
+
+.collapse-button-vertical {
+    height: var(--toolbar-button-size) !important;
+    width: 100% !important;
+    border-radius: 0 0 50% 50% !important;
+    top: 0 !important;
+    left: 55% !important;
+}
+
+.collapse-arrow-vertical {
+    left: 50% !important;
+    top: 65% !important;
+    transform: translate(-50%, -45%) rotate(90deg) !important;
+}
